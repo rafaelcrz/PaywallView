@@ -33,7 +33,7 @@ struct PaywallView: View {
                             primaryHeader: paywall.primaryHeader ?? "",
                             secondaryHeader: paywall.secondaryHeader ?? ""
                         ).padding(.top)
-                        
+
                         carouselSection()
                             .padding(.horizontal, -16)
                         

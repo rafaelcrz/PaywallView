@@ -26,7 +26,13 @@ struct PaywallView: View {
                 ScrollView {
                     VStack(alignment: .center) {
                         Spacer()
-                        headerSection()
+                        DismissHeaderView(type: .text("not now"), action: {
+                            dismiss()
+                        })
+                        TitleHeaderView(
+                            primaryHeader: "Primary header",
+                            secondaryHeader: "secondary header"
+                        ).padding(.top)
                         carouselSection()
                             .padding(.horizontal, -16)
                         Text("Pro access to all features")

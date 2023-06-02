@@ -19,10 +19,9 @@ enum Section {
 struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @StateObject var paywall: Paywall = Paywall(
-        primaryColor: Color(.systemMint),
-        planPresentation: .expandable
-    )
+    @State private var selectedPlan: Plan?
+    @StateObject var paywall: Paywall
+    var planSelected: ((Plan) -> Void)?
     
     var body: some View {
         NavigationStack {
@@ -35,8 +34,8 @@ struct PaywallView: View {
                         })
                         
                         TitleHeaderView(
-                            primaryHeader: "Primary header",
-                            secondaryHeader: "secondary header"
+                            primaryHeader: paywall.primaryHeader ?? "",
+                            secondaryHeader: paywall.secondaryHeader ?? ""
                         ).padding(.top)
                         
                         carouselSection()
@@ -64,20 +63,14 @@ struct PaywallView: View {
                     .padding()
                 }
             }
-        }.onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                self.paywall.options = [
-                    .previewMonthly,
-                    .previewYearly
-                ]
-            })
         }
     }
     
     private var planOptionListView: some View {
         PlanOptionListView(
             primaryColor: paywall.primaryColor,
-            options: paywall.options
+            options: paywall.options,
+            selectedPlan: $selectedPlan
         )
     }
     
@@ -93,33 +86,12 @@ struct PaywallView: View {
                     .fill(.clear)
                     .frame(height: 200)
                     .overlay {
-                        ProgressView("Loading plans")
+                        ProgressView("")
                             .progressViewStyle(.circular)
                     }
             } else {
                 planOptionListView
             }
-        }
-    }
-    
-    private func headerSection() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    //                    Image.xmarkCircleIcon
-                    //                        .font(.title3)
-                    //                        .opacity(0.5)
-                    Text("Not Now")
-                }
-                .foregroundColor(.secondary)
-                .padding(.bottom)
-                Spacer()
-            }
-            Text("Pro access to all features")
-                .font(.title)
-                .fontWeight(.semibold)
         }
     }
     
@@ -147,9 +119,11 @@ struct PaywallView: View {
     
     private var actionButton: some View {
         Button {
-            
+            if let selectedPlan = selectedPlan {
+                planSelected?(selectedPlan)
+            }
         } label: {
-            Text("Start Free Trial")
+            Text(paywall.actionButtonPrimaryTitle)
                 .frame(maxWidth: .infinity)
                 .foregroundColor(Color(.black))
                 .padding(10)
@@ -161,7 +135,7 @@ struct PaywallView: View {
     
     private func restorePurchasesButton() -> some View {
         return Button {
-            // TODO: action
+
         } label: {
             Text("Restore Purchases")
         }
@@ -177,7 +151,18 @@ struct PaywallView: View {
 }
 
 struct PaywallView_Previews: PreviewProvider {
+    static var paywall = Paywall(
+        primaryColor: .red,
+        planPresentation: .progress,
+        actionButtonPrimaryTitle: "teste"
+    )
+    
     static var previews: some View {
-        PaywallView()
+        paywall.options = [
+            .previewYearly,
+            .previewMonthly
+        ]
+        
+        return PaywallView(paywall: paywall)
     }
 }

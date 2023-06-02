@@ -70,10 +70,6 @@ struct PaywallNew {
     let primaryColor: Color = Color(.red)
 }
 
-struct Paywall {
-    let primaryColor: Color = Color(.systemOrange)
-}
-
 struct PlanOptionListView: View {
     let paywall: PaywallNew
     @State var selectedPlan: Plan?

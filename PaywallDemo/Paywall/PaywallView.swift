@@ -19,10 +19,7 @@ enum Section {
 struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     
-    var paywall: Paywall = .init(options: [
-        .previewMonthly,
-        .previewYearly
-    ], primaryColor: Color(.systemOrange))
+    @StateObject var paywall: Paywall = Paywall(primaryColor: Color(.systemMint))
     
     var body: some View {
         NavigationStack {
@@ -44,10 +41,11 @@ struct PaywallView: View {
                         
                         Text("Pro access to all features")
                         
-                        PlanOptionListView(primaryColor: paywall.primaryColor, options: [
-                            .previewMonthly,
-                            .previewYearly
-                        ])
+                        PlanOptionListView(
+                            primaryColor: paywall.primaryColor,
+                            options: paywall.options
+                        )
+                        .animation(.easeIn, value: paywall.options)
                         
                         actionButton
                         
@@ -59,6 +57,13 @@ struct PaywallView: View {
                     .padding()
                 }
             }
+        }.onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.paywall.options = [
+                    .previewMonthly,
+                    .previewYearly
+                ]
+            })
         }
     }
     

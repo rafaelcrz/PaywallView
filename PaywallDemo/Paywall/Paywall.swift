@@ -8,12 +8,19 @@
 import Foundation
 import SwiftUI
 
+enum PlanSectionPresentation {
+    case expandable
+    case progress
+}
+
 final class Paywall: ObservableObject {
-    var primaryColor: Color
+    let primaryColor: Color
+    let planPresentation: PlanSectionPresentation
     @Published var options: [Plan] = []
     @Published var actionButtonPrimaryTitle: String?
     
-    init(primaryColor: Color) {
+    init(primaryColor: Color, planPresentation: PlanSectionPresentation = .progress) {
         self.primaryColor = primaryColor
+        self.planPresentation = planPresentation
     }
 }

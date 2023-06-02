@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct PaywallNew {
+struct Paywall {
     let options: [Plan]
     let primaryColor: Color = Color(.red)
 }

@@ -29,10 +29,6 @@ struct PaywallView: View {
                 Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
                 ScrollView {
                     VStack(alignment: .center) {
-                        DismissHeaderView(type: .button, action: {
-                            dismiss()
-                        })
-                        
                         TitleHeaderView(
                             primaryHeader: paywall.primaryHeader ?? "",
                             secondaryHeader: paywall.secondaryHeader ?? ""
@@ -70,6 +66,23 @@ struct PaywallView: View {
                     }
                     .animation(.spring(), value: paywall.options)
                     .padding()
+                    .if(paywall.cancelType == .button, { view in
+                        view.toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button {
+                                    dismiss()
+                                } label: {
+                                    Image.xmarkCircleIcon
+                                        .font(.title3)
+                                        .foregroundStyle(
+                                            Color.white.opacity(0.6),
+                                            Color.secondary.opacity(0.4)
+                                        )
+                                }
+                                
+                            }
+                        }
+                    })
                 }
             }
         }
@@ -144,7 +157,7 @@ struct PaywallView: View {
     
     private func restorePurchasesButton() -> some View {
         Button {
-
+            
         } label: {
             Text("Restore Purchases")
                 .font(.caption)

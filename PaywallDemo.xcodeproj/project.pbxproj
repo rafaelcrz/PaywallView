@@ -21,6 +21,9 @@
 		925753002A28B20C0073F8EE /* PlanOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925752FF2A28B20C0073F8EE /* PlanOptionView.swift */; };
 		925753272A298F420073F8EE /* DismissHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925753262A298F420073F8EE /* DismissHeaderView.swift */; };
 		925753292A2A0A4B0073F8EE /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925753282A2A0A4B0073F8EE /* TitleHeaderView.swift */; };
+		9257532B2A2A0FB70073F8EE /* Paywall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532A2A2A0FB70073F8EE /* Paywall.swift */; };
+		9257532D2A2A0FDE0073F8EE /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532C2A2A0FDE0073F8EE /* Plan.swift */; };
+		9257532F2A2A0FF00073F8EE /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532E2A2A0FF00073F8EE /* Badge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		925752FF2A28B20C0073F8EE /* PlanOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanOptionView.swift; sourceTree = "<group>"; };
 		925753262A298F420073F8EE /* DismissHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissHeaderView.swift; sourceTree = "<group>"; };
 		925753282A2A0A4B0073F8EE /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
+		9257532A2A2A0FB70073F8EE /* Paywall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paywall.swift; sourceTree = "<group>"; };
+		9257532C2A2A0FDE0073F8EE /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		9257532E2A2A0FF00073F8EE /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 			children = (
 				925753222A298D9F0073F8EE /* Sections */,
 				86E05487294B922400941996 /* PaywallView.swift */,
+				9257532A2A2A0FB70073F8EE /* Paywall.swift */,
+				9257532C2A2A0FDE0073F8EE /* Plan.swift */,
+				9257532E2A2A0FF00073F8EE /* Badge.swift */,
 			);
 			path = Paywall;
 			sourceTree = "<group>";
@@ -224,13 +233,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				86E05493294B923300941996 /* ImageExt.swift in Sources */,
+				9257532F2A2A0FF00073F8EE /* Badge.swift in Sources */,
 				86E05495294B926100941996 /* ColorExt.swift in Sources */,
+				9257532D2A2A0FDE0073F8EE /* Plan.swift in Sources */,
 				86E05479294B90BE00941996 /* ContentView.swift in Sources */,
 				86E0548D294B922500941996 /* PaywallView.swift in Sources */,
 				925753292A2A0A4B0073F8EE /* TitleHeaderView.swift in Sources */,
 				86E05490294B922500941996 /* FeatureCard.swift in Sources */,
 				86E0548E294B922500941996 /* FeatureCardView.swift in Sources */,
 				86E05497294B92C600941996 /* InfiniteScroller.swift in Sources */,
+				9257532B2A2A0FB70073F8EE /* Paywall.swift in Sources */,
 				925753272A298F420073F8EE /* DismissHeaderView.swift in Sources */,
 				86E05477294B90BE00941996 /* PaywallDemoApp.swift in Sources */,
 				925753002A28B20C0073F8EE /* PlanOptionView.swift in Sources */,

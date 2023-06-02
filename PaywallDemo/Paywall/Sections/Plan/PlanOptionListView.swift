@@ -21,7 +21,6 @@ struct PlanOptionListView: View {
                 option: plan
             )
         }
-        .animation(.spring(), value: selectedPlan)
     }
 }
 

@@ -57,7 +57,16 @@ struct PaywallView: View {
                         Label("Purchases share between family members.", systemImage: "person.circle.fill")
                             .font(.caption2)
                             .foregroundColor(.secondary)
+                        
                         restorePurchasesButton()
+                            .padding()
+                        
+                        HStack(spacing: 16) {
+                            Link("Terms", destination: URL(string: "www.google.com")!)
+                            Link("Privacy", destination: URL(string: "www.google.com")!)
+                        }
+                        .foregroundColor(.secondary)
+                        .font(.caption)
                     }
                     .animation(.spring(), value: paywall.options)
                     .padding()
@@ -134,10 +143,11 @@ struct PaywallView: View {
     }
     
     private func restorePurchasesButton() -> some View {
-        return Button {
+        Button {
 
         } label: {
             Text("Restore Purchases")
+                .font(.caption)
         }
     }
     
@@ -152,7 +162,7 @@ struct PaywallView: View {
 
 struct PaywallView_Previews: PreviewProvider {
     static var paywall = Paywall(
-        primaryColor: .red,
+        primaryColor: Color(.systemPink),
         planPresentation: .progress,
         actionButtonPrimaryTitle: "teste"
     )

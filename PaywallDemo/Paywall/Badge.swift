@@ -24,7 +24,7 @@ struct Badge: Hashable {
     static func preview(alwaysVisible: Bool = true) -> Badge {
         return Badge(
             id: UUID().uuidString,
-            title: "badge title",
+            title: "badge",
             alwaysVisible: alwaysVisible,
             alignment: .top,
             primaryColor: Color(.systemCyan)

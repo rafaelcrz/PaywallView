@@ -19,6 +19,11 @@ enum Section {
 struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     
+    var paywall: Paywall = .init(options: [
+        .previewMonthly,
+        .previewYearly
+    ], primaryColor: Color(.systemOrange))
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -39,10 +44,10 @@ struct PaywallView: View {
                         
                         Text("Pro access to all features")
                         
-                        PlanOptionListView(paywall: .init(options: [
+                        PlanOptionListView(primaryColor: paywall.primaryColor, options: [
                             .previewMonthly,
                             .previewYearly
-                        ]))
+                        ])
                         
                         actionButton
                         
@@ -106,11 +111,11 @@ struct PaywallView: View {
         } label: {
             Text("Start Free Trial")
                 .frame(maxWidth: .infinity)
-                .foregroundColor(Color(.white))
+                .foregroundColor(Color(.black))
                 .padding(10)
         }
         .padding(.horizontal)
-        .tint(Color(.systemBlue))
+        .tint(paywall.primaryColor)
         .buttonStyle(.borderedProminent)
     }
     

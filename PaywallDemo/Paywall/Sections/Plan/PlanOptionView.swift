@@ -32,7 +32,7 @@ struct PlanOptionView: View {
             .cornerRadius(12)
             
             if let badge = option.badge {
-                highlighterView(badge)
+                badgeView(badge)
             }
         }
         .onTapGesture { selectedPlan = option }
@@ -68,7 +68,7 @@ private extension PlanOptionView {
         }
     }
     
-    func highlighterView(_ badge: Badge) -> some View {
+    func badgeView(_ badge: Badge) -> some View {
         VStack {
             if badge.alignment == .bottom {
                 Spacer()
@@ -78,7 +78,7 @@ private extension PlanOptionView {
                 Text(badge.title)
                     .font(.system(size: 14, weight: .medium))
                     .padding(8)
-                    .background(primaryColor)
+                    .background(badge.primaryColor)
                     .foregroundColor(.white)
                     .cornerRadius(6)
                     .opacity((selectedPlan?.id == option.id || badge.alwaysVisible) ? 1 : 0)

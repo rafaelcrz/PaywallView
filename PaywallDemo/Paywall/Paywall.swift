@@ -10,5 +10,5 @@ import SwiftUI
 
 struct Paywall {
     let options: [Plan]
-    let primaryColor: Color = Color(.red)
+    let primaryColor: Color
 }

@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Badge: Hashable {
     var id: String
     var title: String
     var alwaysVisible: Bool
     let alignment: Alignment
+    var primaryColor: Color
     
     enum Alignment {
         case top
@@ -22,9 +24,10 @@ struct Badge: Hashable {
     static func preview(alwaysVisible: Bool = true) -> Badge {
         return Badge(
             id: UUID().uuidString,
-            title: "save 20%",
+            title: "badge title",
             alwaysVisible: alwaysVisible,
-            alignment: .top
+            alignment: .top,
+            primaryColor: Color(.systemCyan)
         )
     }
 }

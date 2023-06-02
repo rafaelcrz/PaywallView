@@ -9,14 +9,15 @@ import Foundation
 import SwiftUI
 
 struct PlanOptionListView: View {
-    let paywall: Paywall
+    let primaryColor: Color
+    let options: [Plan]
     @State var selectedPlan: Plan?
     
     var body: some View {
-        ForEach(paywall.options, id: \.id) { plan in
+        ForEach(options, id: \.id) { plan in
             PlanOptionView(
                 selectedPlan: $selectedPlan,
-                primaryColor: paywall.primaryColor,
+                primaryColor: primaryColor,
                 option: plan
             )
         }
@@ -28,10 +29,10 @@ struct PlanOptionListView: View {
 struct PlanOptionListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PlanOptionListView(paywall: Paywall(options: [
+            PlanOptionListView(primaryColor: .pink, options: [
                 .previewMonthly,
                 .previewYearly,
-            ])).previewLayout(.sizeThatFits)
+            ]).previewLayout(.sizeThatFits)
         }
     }
 }

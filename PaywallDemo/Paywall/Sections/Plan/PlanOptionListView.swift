@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct PlanOptionListView: View {
-    let paywall: PaywallNew
+    let paywall: Paywall
     @State var selectedPlan: Plan?
     
     var body: some View {
@@ -28,7 +28,7 @@ struct PlanOptionListView: View {
 struct PlanOptionListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PlanOptionListView(paywall: PaywallNew(options: [
+            PlanOptionListView(paywall: Paywall(options: [
                 .previewMonthly,
                 .previewYearly,
             ])).previewLayout(.sizeThatFits)

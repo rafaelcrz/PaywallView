@@ -18,12 +18,36 @@ struct PaywallDemoApp: App {
 
 struct PageView: View {
     @State private var showingPaywall: Bool = false
+    
+    @StateObject var paywallConfig: Paywall = .init(
+        primaryColor: .red,
+        planPresentation: .progress,
+        actionButtonPrimaryTitle: "teste"
+    )
+    
     var body: some View {
         Button("Pro access") {
             showingPaywall.toggle()
-        }.sheet(isPresented: $showingPaywall) {
-            PaywallView()
         }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView(paywall: paywallConfig) { plan in
+                showingPaywall = false
+            }
+        }
+        .onChange(of: showingPaywall) { newValue in
+            if showingPaywall {
+                load()
+            }
+        }
+    }
+    
+    private func load() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.paywallConfig.options = [
+                .previewMonthly,
+                .previewYearly
+            ]
+        })
     }
 }
 

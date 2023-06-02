@@ -24,6 +24,7 @@
 		9257532B2A2A0FB70073F8EE /* Paywall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532A2A2A0FB70073F8EE /* Paywall.swift */; };
 		9257532D2A2A0FDE0073F8EE /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532C2A2A0FDE0073F8EE /* Plan.swift */; };
 		9257532F2A2A0FF00073F8EE /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532E2A2A0FF00073F8EE /* Badge.swift */; };
+		925753312A2A13510073F8EE /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925753302A2A13510073F8EE /* ActionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		9257532A2A2A0FB70073F8EE /* Paywall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paywall.swift; sourceTree = "<group>"; };
 		9257532C2A2A0FDE0073F8EE /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		9257532E2A2A0FF00073F8EE /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		925753302A2A13510073F8EE /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				9257532A2A2A0FB70073F8EE /* Paywall.swift */,
 				9257532C2A2A0FDE0073F8EE /* Plan.swift */,
 				9257532E2A2A0FF00073F8EE /* Badge.swift */,
+				925753302A2A13510073F8EE /* ActionButton.swift */,
 			);
 			path = Paywall;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				86E05479294B90BE00941996 /* ContentView.swift in Sources */,
 				86E0548D294B922500941996 /* PaywallView.swift in Sources */,
 				925753292A2A0A4B0073F8EE /* TitleHeaderView.swift in Sources */,
+				925753312A2A13510073F8EE /* ActionButton.swift in Sources */,
 				86E05490294B922500941996 /* FeatureCard.swift in Sources */,
 				86E0548E294B922500941996 /* FeatureCardView.swift in Sources */,
 				86E05497294B92C600941996 /* InfiniteScroller.swift in Sources */,

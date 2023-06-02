@@ -19,6 +19,7 @@ final class Paywall: ObservableObject {
     var primaryHeader: String?
     var secondaryHeader: String?
     var actionButtonPrimaryTitle: String
+    var cancelType: CancelType = .button
     @Published var options: [Plan] = []
     
     init(

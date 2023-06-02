@@ -25,22 +25,27 @@ struct PaywallView: View {
                 Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
                 ScrollView {
                     VStack(alignment: .center) {
-                        Spacer()
                         DismissHeaderView(type: .text("not now"), action: {
                             dismiss()
                         })
+                        
                         TitleHeaderView(
                             primaryHeader: "Primary header",
                             secondaryHeader: "secondary header"
                         ).padding(.top)
+                        
                         carouselSection()
                             .padding(.horizontal, -16)
+                        
                         Text("Pro access to all features")
+                        
                         PlanOptionListView(paywall: .init(options: [
                             .previewMonthly,
                             .previewYearly
                         ]))
-                        actionButton()
+                        
+                        actionButton
+                        
                         Label("Purchases share between family members.", systemImage: "person.circle.fill")
                             .font(.caption2)
                             .foregroundColor(.secondary)
@@ -95,7 +100,7 @@ struct PaywallView: View {
         }
     }
     
-    private func actionButton() -> some View {
+    private var actionButton: some View {
         Button {
             
         } label: {

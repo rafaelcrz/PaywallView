@@ -21,7 +21,6 @@ struct PlanOptionListView: View {
                 option: plan
             )
         }
-        .scrollDisabled(true)
         .animation(.spring(), value: selectedPlan)
     }
 }

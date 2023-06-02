@@ -19,7 +19,10 @@ enum Section {
 struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @StateObject var paywall: Paywall = Paywall(primaryColor: Color(.systemMint))
+    @StateObject var paywall: Paywall = Paywall(
+        primaryColor: Color(.systemMint),
+        planPresentation: .expandable
+    )
     
     var body: some View {
         NavigationStack {
@@ -27,7 +30,7 @@ struct PaywallView: View {
                 Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
                 ScrollView {
                     VStack(alignment: .center) {
-                        DismissHeaderView(type: .text("not now"), action: {
+                        DismissHeaderView(type: .button, action: {
                             dismiss()
                         })
                         
@@ -41,11 +44,14 @@ struct PaywallView: View {
                         
                         Text("Pro access to all features")
                         
-                        PlanOptionListView(
-                            primaryColor: paywall.primaryColor,
-                            options: paywall.options
-                        )
-                        .animation(.easeIn, value: paywall.options)
+                        Group {
+                            switch paywall.planPresentation {
+                            case .progress:
+                                planOptionsProgressPresentationView
+                            case .expandable:
+                                planOptionsExpandablePresentationView
+                            }
+                        }
                         
                         actionButton
                         
@@ -54,6 +60,7 @@ struct PaywallView: View {
                             .foregroundColor(.secondary)
                         restorePurchasesButton()
                     }
+                    .animation(.spring(), value: paywall.options)
                     .padding()
                 }
             }
@@ -64,6 +71,34 @@ struct PaywallView: View {
                     .previewYearly
                 ]
             })
+        }
+    }
+    
+    private var planOptionListView: some View {
+        PlanOptionListView(
+            primaryColor: paywall.primaryColor,
+            options: paywall.options
+        )
+    }
+    
+    private var planOptionsExpandablePresentationView: some View {
+        planOptionListView
+            .frame(maxHeight: !paywall.options.isEmpty ? .infinity : 0)
+    }
+    
+    private var planOptionsProgressPresentationView: some View {
+        Group {
+            if paywall.options.isEmpty {
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height: 200)
+                    .overlay {
+                        ProgressView("Loading plans")
+                            .progressViewStyle(.circular)
+                    }
+            } else {
+                planOptionListView
+            }
         }
     }
     

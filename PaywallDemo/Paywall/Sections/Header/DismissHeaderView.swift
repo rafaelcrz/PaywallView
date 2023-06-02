@@ -8,33 +8,38 @@
 import Foundation
 import SwiftUI
 
-enum CancelType {
+enum CancelType: Equatable {
     case button
     case text(String)
+    
+    static func == (lhs: CancelType, rhs: CancelType) -> Bool {
+        if case .button = lhs, case .button = rhs {
+            return true
+        }
+        
+        if case .text(let string1) = lhs, case .text(let string2) = rhs {
+            return string1 == string2
+        }
+        
+        return false
+    }
 }
 
 struct DismissHeaderView: View {
     let type: CancelType
     var action: () -> ()
     var body: some View {
-        HStack(alignment: .center) {
-            Button {
-                action()
-            } label: {
-                if case .text(let title) = type {
-                    Text(title)
-                } else {
-                    Image.xmarkCircleIcon
-                        .font(.title)
-                        .foregroundStyle(
-                            Color.white.opacity(0.6),
-                            Color.secondary.opacity(0.4)
-                        )
-                }
+        Group {
+            if case .text(let title) = type {
+                Text(title)
+            } else {
+                Image.xmarkCircleIcon
+                    .foregroundStyle(
+                        Color.white.opacity(0.6),
+                        Color.secondary.opacity(0.4)
+                    )
             }
-            .foregroundColor(.secondary)
-            Spacer()
-        }
+        }.foregroundColor(.secondary)
     }
 }
 

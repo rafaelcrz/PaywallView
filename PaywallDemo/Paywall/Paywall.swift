@@ -8,7 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct Paywall {
-    let options: [Plan]
-    let primaryColor: Color
+final class Paywall: ObservableObject {
+    var primaryColor: Color
+    @Published var options: [Plan] = []
+    @Published var actionButtonPrimaryTitle: String?
+    
+    init(primaryColor: Color) {
+        self.primaryColor = primaryColor
+    }
 }

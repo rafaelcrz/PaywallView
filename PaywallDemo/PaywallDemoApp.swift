@@ -11,7 +11,24 @@ import SwiftUI
 struct PaywallDemoApp: App {
     var body: some Scene {
         WindowGroup {
+            PageView()
+        }
+    }
+}
+
+struct PageView: View {
+    @State private var showingPaywall: Bool = false
+    var body: some View {
+        Button("Pro access") {
+            showingPaywall.toggle()
+        }.sheet(isPresented: $showingPaywall) {
             PaywallView()
         }
+    }
+}
+
+struct PageView_Previews: PreviewProvider {
+    static var previews: some View {
+        PageView()
     }
 }

@@ -13,7 +13,7 @@ struct InfiniteScroller<Content: View>: View {
         case forward
         case backward
     }
-    
+    @State private var isAnimating = false
     let contentWidth: CGFloat
     let direction: Direction
     var content: (() -> Content)
@@ -24,13 +24,12 @@ struct InfiniteScroller<Content: View>: View {
                 HStack(spacing: 0) {
                     content()
                     content()
-                }
-                .offset(x: xOffset, y: 0)
+                }.offset(x: xOffset, y: 0)
         }
-        .disabled(true)
+        .animation(.linear(duration: 20).repeatForever(autoreverses: false), value: xOffset)
         .onAppear {
             xOffset = direction == .forward ? 0 : -contentWidth
-            withAnimation(.linear(duration: 20).repeatForever(autoreverses: false)) {
+            withAnimation {
                 xOffset = direction == .forward ? -contentWidth : 0
             }
         }

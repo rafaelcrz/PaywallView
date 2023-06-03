@@ -29,11 +29,13 @@ struct PaywallView: View {
                 Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
                 ScrollView {
                     VStack(alignment: .center) {
-                        TitleHeaderView(
-                            primaryHeader: paywall.primaryHeader ?? "",
-                            secondaryHeader: paywall.secondaryHeader ?? ""
-                        ).padding(.top)
-
+                        if paywall.primaryHeader != nil || paywall.secondaryHeader != nil {
+                            TitleHeaderView(
+                                primaryHeader: paywall.primaryHeader ?? "",
+                                secondaryHeader: paywall.secondaryHeader ?? ""
+                            ).padding(.top)
+                        }
+                        
                         carouselSection()
                             .padding(.horizontal, -16)
                         
@@ -128,14 +130,14 @@ struct PaywallView: View {
                 }.padding(8)
             }
             
-            InfiniteScroller(contentWidth: getContentWidth(), direction: .backward) {
-                HStack(spacing: 16) {
-                    FeatureCardView(featureCard: .customTags)
-                    FeatureCardView(featureCard: .moreStats)
-                    FeatureCardView(featureCard: .moreDates)
-                    FeatureCardView(featureCard: .unlimitedGoals)
-                }.padding(8)
-            }
+            //            InfiniteScroller(contentWidth: getContentWidth(), direction: .backward) {
+            //                HStack(spacing: 16) {
+            //                    FeatureCardView(featureCard: .customTags)
+            //                    FeatureCardView(featureCard: .moreStats)
+            //                    FeatureCardView(featureCard: .moreDates)
+            //                    FeatureCardView(featureCard: .unlimitedGoals)
+            //                }.padding(8)
+            //            }
         }
     }
     

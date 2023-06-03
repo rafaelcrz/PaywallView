@@ -145,10 +145,11 @@ struct PaywallView: View {
                 planSelected?(selectedPlan)
             }
         } label: {
-            Text(paywall.actionButtonPrimaryTitle)
+            Text(selectedPlan?.actionButtonPrimaryTitle ?? paywall.actionButtonPrimaryTitle)
                 .frame(maxWidth: .infinity)
                 .foregroundColor(Color(.black))
                 .padding(10)
+                .animation(.spring(), value: selectedPlan?.actionButtonPrimaryTitle)
         }
         .padding(.horizontal)
         .tint(paywall.primaryColor)

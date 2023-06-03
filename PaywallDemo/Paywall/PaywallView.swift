@@ -25,66 +25,69 @@ struct PaywallView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
-                ScrollView {
-                    VStack(alignment: .center) {
-                        if paywall.primaryHeader != nil || paywall.secondaryHeader != nil {
-                            TitleHeaderView(
-                                primaryHeader: paywall.primaryHeader ?? "",
-                                secondaryHeader: paywall.secondaryHeader ?? ""
-                            ).padding(.top)
-                        }
-                        
-                        carouselSection()
-                            .padding(.horizontal, -16)
-                        
-                        Text("Pro access to all features")
-                        
-                        Group {
-                            switch paywall.planPresentation {
-                            case .progress:
-                                planOptionsProgressPresentationView
-                            case .expandable:
-                                planOptionsExpandablePresentationView
+            GeometryReader { geometry in
+                ZStack {
+                    Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
+                    ScrollView {
+                        VStack(alignment: .center) {
+                            if paywall.primaryHeader != nil || paywall.secondaryHeader != nil {
+                                TitleHeaderView(
+                                    primaryHeader: paywall.primaryHeader ?? "",
+                                    secondaryHeader: paywall.secondaryHeader ?? ""
+                                ).padding(.top)
                             }
-                        }
-                        
-                        actionButton
-                        
-                        Label("Purchases share between family members.", systemImage: "person.circle.fill")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                        
-                        restorePurchasesButton()
-                            .padding()
-                        
-                        HStack(spacing: 16) {
-                            Link("Terms", destination: URL(string: "www.google.com")!)
-                            Link("Privacy", destination: URL(string: "www.google.com")!)
-                        }
-                        .foregroundColor(.secondary)
-                        .font(.caption)
-                    }
-                    .animation(.spring(), value: paywall.options)
-                    .padding()
-                    .if(paywall.cancelType == .button, { view in
-                        view.toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button {
-                                    dismiss()
-                                } label: {
-                                    Image.xmarkCircleIcon
-                                        .font(.title3)
-                                        .foregroundStyle(
-                                            Color.white.opacity(0.6),
-                                            Color.secondary.opacity(0.4)
-                                        )
+                            
+                            carouselSection()
+                                .padding(.horizontal, -16)
+                            Spacer()
+                            Text("Pro access to all features")
+                                .padding(.bottom)
+                            
+                            Group {
+                                switch paywall.planPresentation {
+                                case .progress:
+                                    planOptionsProgressPresentationView
+                                case .expandable:
+                                    planOptionListView
                                 }
-                                
                             }
+                            
+                            actionButton
+                            Label("Purchases share between family members.", systemImage: "person.circle.fill")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                            
+                            restorePurchasesButton()
+                                .padding()
+                            
+                            HStack(spacing: 16) {
+                                Link("Terms", destination: URL(string: "www.google.com")!)
+                                Link("Privacy", destination: URL(string: "www.google.com")!)
+                            }
+                            .foregroundColor(.secondary)
+                            .font(.caption)
                         }
-                    })
+                        .frame(minHeight: geometry.size.height)
+                        .animation(.spring(), value: paywall.options)
+                        .padding()
+                        .if(paywall.cancelType == .button, { view in
+                            view.toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button {
+                                        dismiss()
+                                    } label: {
+                                        Image.xmarkCircleIcon
+                                            .font(.title3)
+                                            .foregroundStyle(
+                                                Color.white.opacity(0.6),
+                                                Color.secondary.opacity(0.4)
+                                            )
+                                    }
+                                    
+                                }
+                            }
+                        })
+                    }.frame(width: geometry.size.width)
                 }
             }
         }
@@ -96,11 +99,6 @@ struct PaywallView: View {
             options: paywall.options,
             selectedPlan: $selectedPlan
         )
-    }
-    
-    private var planOptionsExpandablePresentationView: some View {
-        planOptionListView
-            .frame(maxHeight: !paywall.options.isEmpty ? .infinity : 0)
     }
     
     private var planOptionsProgressPresentationView: some View {

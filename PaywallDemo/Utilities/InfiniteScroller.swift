@@ -26,6 +26,7 @@ struct InfiniteScroller<Content: View>: View {
                     content()
                 }.offset(x: xOffset, y: 0)
         }
+        .scrollDisabled(true)
         .animation(.linear(duration: 20).repeatForever(autoreverses: false), value: xOffset)
         .onAppear {
             xOffset = direction == .forward ? 0 : -contentWidth

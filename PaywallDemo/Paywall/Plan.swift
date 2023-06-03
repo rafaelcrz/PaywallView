@@ -15,6 +15,7 @@ struct Plan: Hashable {
     var secondaryIndo: String
     var primary: Bool
     var badge: Badge?
+    var actionButtonPrimaryTitle: String?
     
     static var previewMonthly: Plan {
         return Plan(
@@ -36,7 +37,8 @@ struct Plan: Hashable {
             primaryInfo: "7 days free trial",
             secondaryIndo: "($4.17/mo)",
             primary: true,
-            badge: .preview(alwaysVisible: false)
+            badge: .preview(alwaysVisible: false),
+            actionButtonPrimaryTitle: "Action plan title"
         )
     }
 }

@@ -24,7 +24,7 @@ struct PageView: View {
         planPresentation: .progress,
         primaryHeader: "Primary header",
         secondaryHeader: "Secondary header",
-        actionButtonPrimaryTitle: "teste"
+        actionButtonPrimaryTitle: "Primary action title"
     )
     
     var body: some View {

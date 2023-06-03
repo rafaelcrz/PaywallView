@@ -118,24 +118,13 @@ struct PaywallView: View {
     }
     
     private func carouselSection() -> some View {
-        return VStack {
-            InfiniteScroller(contentWidth: getContentWidth(), direction: .forward) {
-                HStack(spacing: 16) {
-                    FeatureCardView(featureCard: .unlimitedEntries)
-                    FeatureCardView(featureCard: .importData)
-                    FeatureCardView(featureCard: .biometricsLock)
-                    FeatureCardView(featureCard: .automaticBackups)
-                }.padding(8)
-            }
-            
-            //            InfiniteScroller(contentWidth: getContentWidth(), direction: .backward) {
-            //                HStack(spacing: 16) {
-            //                    FeatureCardView(featureCard: .customTags)
-            //                    FeatureCardView(featureCard: .moreStats)
-            //                    FeatureCardView(featureCard: .moreDates)
-            //                    FeatureCardView(featureCard: .unlimitedGoals)
-            //                }.padding(8)
-            //            }
+        InfiniteScroller(contentWidth: getContentWidth(), direction: .forward) {
+            HStack(spacing: 16) {
+                FeatureCardView(featureCard: .unlimitedEntries)
+                FeatureCardView(featureCard: .importData)
+                FeatureCardView(featureCard: .biometricsLock)
+                FeatureCardView(featureCard: .automaticBackups)
+            }.padding(8)
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PaywallView
 
 @main
 struct PaywallDemoApp: App {
@@ -18,7 +19,7 @@ struct PaywallDemoApp: App {
 
 struct PageView: View {
     @State private var showingPaywall: Bool = false
-    
+
     @StateObject var paywallConfig: Paywall = .init(
         primaryColor: .red,
         cancelType: .button,
@@ -48,10 +49,7 @@ struct PageView: View {
     private func load() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.paywallConfig.options = [
-                .previewMonthly,
-                .previewYearly,
-                .init(id: "sd", name: "Weekly", cost: "123", primaryInfo: "8 days free", secondaryIndo: "", primary: false),
-                .previewMonthly
+                .previewYearly
             ]
         })
     }

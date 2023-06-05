@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct PlanOptionView: View {
-    @Binding var selectedPlan: Plan?
+    @Binding var selectedPlan: (Plan)?
     var primaryColor: Color
     let option: Plan
     
@@ -55,7 +55,7 @@ private extension PlanOptionView {
                     Text(option.cost)
                         .font(.callout)
                 }
-                .fontWeight(.semibold)
+//                .fontWeight(.semibold)
                 Text(option.secondaryIndo)
                     .font(.caption)
                     .fontWeight(.semibold)
@@ -92,7 +92,7 @@ private extension PlanOptionView {
 }
 
 struct PlanOptionView_Previews: PreviewProvider {
-    @State static var selectedPlan: Plan?
+    @State static var selectedPlan: (Plan)?
     static var previews: some View {
         PlanOptionView(
             selectedPlan: .constant(.previewMonthly),

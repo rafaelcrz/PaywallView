@@ -8,14 +8,28 @@
 import Foundation
 import SwiftUI
 
-struct Badge: Hashable {
-    var id: String
-    var title: String
-    var alwaysVisible: Bool
+public struct Badge: Hashable, Equatable {
+    let id: String
+    let title: String
+    let alwaysVisible: Bool
     let alignment: Alignment
-    var primaryColor: Color
+    let primaryColor: Color
     
-    enum Alignment {
+    public init(
+        id: String,
+        title: String,
+        alwaysVisible: Bool,
+        alignment: Alignment,
+        primaryColor: Color
+    ) {
+        self.id = id
+        self.title = title
+        self.alwaysVisible = alwaysVisible
+        self.alignment = alignment
+        self.primaryColor = primaryColor
+    }
+    
+    public enum Alignment {
         case top
         case center
         case bottom

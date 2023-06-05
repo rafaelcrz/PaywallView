@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-enum CancelType: Equatable {
+public enum CancelType: Equatable {
     case button
     case text(String)
     
-    static func == (lhs: CancelType, rhs: CancelType) -> Bool {
+    public static func == (lhs: CancelType, rhs: CancelType) -> Bool {
         if case .button = lhs, case .button = rhs {
             return true
         }

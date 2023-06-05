@@ -16,15 +16,20 @@ enum Section {
     case secondayBurron
 }
 
-struct PaywallView: View {
+public struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @State private var selectedPlan: Plan?
+    @State private var selectedPlan: (Plan)?
     @StateObject var paywall: Paywall
     var planSelected: ((Plan) -> Void)?
     
-    var body: some View {
-        NavigationStack {
+    public init(paywall: Paywall, planSelected: ((Plan) -> Void)? = nil) {
+        self._paywall = .init(wrappedValue: paywall)
+        self.planSelected = planSelected
+    }
+
+    public var body: some View {
+        NavigationView {
             GeometryReader { geometry in
                 ZStack {
                     Color(uiColor: .systemGroupedBackground).ignoresSafeArea()

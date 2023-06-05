@@ -11,7 +11,7 @@ import SwiftUI
 struct PlanOptionListView: View {
     let primaryColor: Color
     let options: [Plan]
-    @Binding var selectedPlan: Plan?
+    @Binding var selectedPlan: (Plan)?
     
     var body: some View {
         VStack {
@@ -28,9 +28,9 @@ struct PlanOptionListView: View {
 
 struct PlanOptionListView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        NavigationView {
             PlanOptionListView(primaryColor: .pink, options: [
-                .previewMonthly,
+                .previewYearly,
                 .previewYearly,
             ], selectedPlan: .constant(.previewYearly)).previewLayout(.sizeThatFits)
         }

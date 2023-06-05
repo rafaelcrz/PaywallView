@@ -23,7 +23,7 @@ struct TitleHeaderView: View {
                         .foregroundColor(.secondary)
                 }
             }
-            .fontWeight(.semibold)
+//            .fontWeight(.semibold)
             Spacer()
         }
     }

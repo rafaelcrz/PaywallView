@@ -8,17 +8,17 @@
 import Foundation
 import SwiftUI
 
-enum FeatureType {
+public enum FeatureType {
     case list
     case carrousel
 }
 
-enum PlanSectionPresentation {
+public enum PlanSectionPresentation {
     case expandable
     case progress
 }
 
-final class Paywall: ObservableObject {
+public final class Paywall: ObservableObject {
     var primaryColor: Color
     var featureType: FeatureType = .list
     var planPresentation: PlanSectionPresentation = .progress
@@ -26,9 +26,9 @@ final class Paywall: ObservableObject {
     var secondaryHeader: String?
     var actionButtonPrimaryTitle: String
     var cancelType: CancelType
-    @Published var options: [Plan] = []
+    @Published public var options: [Plan] = []
     
-    init(
+    public init(
         primaryColor: Color,
         cancelType: CancelType = .button,
         featureType: FeatureType = .list,

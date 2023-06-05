@@ -21,6 +21,8 @@ struct PageView: View {
     
     @StateObject var paywallConfig: Paywall = .init(
         primaryColor: .red,
+        cancelType: .button,
+        featureType: .list,
         planPresentation: .progress,
         primaryHeader: "Primary header",
         secondaryHeader: "Secondary header",

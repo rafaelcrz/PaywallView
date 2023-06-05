@@ -49,6 +49,7 @@
 		9257532E2A2A0FF00073F8EE /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		925753302A2A13510073F8EE /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		925753492A2E024E0073F8EE /* FeaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesListView.swift; sourceTree = "<group>"; };
+		925753512A2E07C40073F8EE /* PaywallView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PaywallView; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 		86E0546A294B90BE00941996 = {
 			isa = PBXGroup;
 			children = (
+				925753512A2E07C40073F8EE /* PaywallView */,
 				86E05475294B90BE00941996 /* PaywallDemo */,
 				86E05474294B90BE00941996 /* Products */,
 			);

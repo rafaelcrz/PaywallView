@@ -36,7 +36,7 @@ struct PaywallView: View {
                                     secondaryHeader: paywall.secondaryHeader ?? ""
                                 ).padding(.top)
                             }
-                            
+                            Spacer()
                             carouselSection()
                                 .padding(.horizontal, -16)
                             Spacer()

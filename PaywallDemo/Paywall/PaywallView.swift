@@ -39,10 +39,15 @@ struct PaywallView: View {
                                 .padding(.bottom)
                             }
                             
-                            FeaturesView()
-                            //                                .padding(.horizontal, -16)
-                            //                            carouselSection()
-                            //                                .padding(.horizontal, -16)
+                            Group {
+                                switch paywall.featureType {
+                                case .list:
+                                    FeaturesView()
+                                case .carrousel:
+                                    carouselSection()
+                                }
+                            }
+                            
                             Spacer()
                             
                             Group {
@@ -211,7 +216,7 @@ struct FeaturesView: View {
                         .foregroundStyle(
                             .white.opacity(0.6),
                             .secondary.opacity(0.4))
-                }.padding(.bottom,4)
+                }.padding(.bottom, 1)
             }
         }
         .padding()

@@ -25,6 +25,7 @@
 		9257532D2A2A0FDE0073F8EE /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532C2A2A0FDE0073F8EE /* Plan.swift */; };
 		9257532F2A2A0FF00073F8EE /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9257532E2A2A0FF00073F8EE /* Badge.swift */; };
 		925753312A2A13510073F8EE /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925753302A2A13510073F8EE /* ActionButton.swift */; };
+		9257534A2A2E024E0073F8EE /* FeaturesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925753492A2E024E0073F8EE /* FeaturesListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		9257532C2A2A0FDE0073F8EE /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		9257532E2A2A0FF00073F8EE /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		925753302A2A13510073F8EE /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		925753492A2E024E0073F8EE /* FeaturesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			children = (
 				86E0548A294B922500941996 /* FeatureCard.swift */,
 				86E05488294B922500941996 /* FeatureCardView.swift */,
+				925753492A2E024E0073F8EE /* FeaturesListView.swift */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				9257532F2A2A0FF00073F8EE /* Badge.swift in Sources */,
 				86E05495294B926100941996 /* ColorExt.swift in Sources */,
 				9257532D2A2A0FDE0073F8EE /* Plan.swift in Sources */,
+				9257534A2A2E024E0073F8EE /* FeaturesListView.swift in Sources */,
 				86E05479294B90BE00941996 /* ContentView.swift in Sources */,
 				86E0548D294B922500941996 /* PaywallView.swift in Sources */,
 				925753292A2A0A4B0073F8EE /* TitleHeaderView.swift in Sources */,

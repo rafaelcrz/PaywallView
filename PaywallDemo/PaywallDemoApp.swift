@@ -47,7 +47,9 @@ struct PageView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.paywallConfig.options = [
                 .previewMonthly,
-                .previewYearly
+                .previewYearly,
+                .init(id: "sd", name: "Weekly", cost: "123", primaryInfo: "8 days free", secondaryIndo: "", primary: false),
+                .previewMonthly
             ]
         })
     }

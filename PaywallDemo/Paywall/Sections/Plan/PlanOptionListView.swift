@@ -14,12 +14,14 @@ struct PlanOptionListView: View {
     @Binding var selectedPlan: Plan?
     
     var body: some View {
-        ForEach(options, id: \.id) { plan in
-            PlanOptionView(
-                selectedPlan: $selectedPlan,
-                primaryColor: primaryColor,
-                option: plan
-            )
+        VStack {
+            ForEach(options, id: \.id) { plan in
+                PlanOptionView(
+                    selectedPlan: $selectedPlan,
+                    primaryColor: primaryColor,
+                    option: plan
+                )
+            }
         }
     }
 }

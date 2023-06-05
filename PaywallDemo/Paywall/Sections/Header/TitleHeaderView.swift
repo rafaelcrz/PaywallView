@@ -16,7 +16,8 @@ struct TitleHeaderView: View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
                 Text(primaryHeader)
-                    .font(.title)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
                 if let secondaryHeader = secondaryHeader {
                     Text(secondaryHeader)
                         .foregroundColor(.secondary)

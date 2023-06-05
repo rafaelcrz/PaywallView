@@ -11,7 +11,7 @@
 		86E05479294B90BE00941996 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E05478294B90BE00941996 /* ContentView.swift */; };
 		86E0547B294B90BF00941996 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86E0547A294B90BF00941996 /* Assets.xcassets */; };
 		86E0547E294B90BF00941996 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86E0547D294B90BF00941996 /* Preview Assets.xcassets */; };
-		925753562A2E08480073F8EE /* PaywallView in Frameworks */ = {isa = PBXBuildFile; productRef = 925753552A2E08480073F8EE /* PaywallView */; };
+		92FDA5112A2E678F00CCC789 /* PaywallView in Frameworks */ = {isa = PBXBuildFile; productRef = 92FDA5102A2E678F00CCC789 /* PaywallView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,8 +20,7 @@
 		86E05478294B90BE00941996 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		86E0547A294B90BF00941996 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86E0547D294B90BF00941996 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		925753512A2E07C40073F8EE /* PaywallView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PaywallView; sourceTree = "<group>"; };
-		925753532A2E08170073F8EE /* PaywallView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PaywallView; sourceTree = "<group>"; };
+		92FDA50F2A2E678600CCC789 /* PaywallDemo */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PaywallDemo; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,7 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				925753562A2E08480073F8EE /* PaywallView in Frameworks */,
+				92FDA5112A2E678F00CCC789 /* PaywallView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,8 +38,7 @@
 		86E0546A294B90BE00941996 = {
 			isa = PBXGroup;
 			children = (
-				925753522A2E08170073F8EE /* Packages */,
-				925753512A2E07C40073F8EE /* PaywallView */,
+				92FDA50E2A2E678600CCC789 /* Packages */,
 				86E05475294B90BE00941996 /* PaywallDemo */,
 				86E05474294B90BE00941996 /* Products */,
 				925753542A2E08480073F8EE /* Frameworks */,
@@ -74,19 +72,19 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		925753522A2E08170073F8EE /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				925753532A2E08170073F8EE /* PaywallView */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		925753542A2E08480073F8EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92FDA50E2A2E678600CCC789 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				92FDA50F2A2E678600CCC789 /* PaywallDemo */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,7 +104,7 @@
 			);
 			name = PaywallDemo;
 			packageProductDependencies = (
-				925753552A2E08480073F8EE /* PaywallView */,
+				92FDA5102A2E678F00CCC789 /* PaywallView */,
 			);
 			productName = PaywallDemo;
 			productReference = 86E05473294B90BE00941996 /* PaywallDemo.app */;
@@ -372,7 +370,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		925753552A2E08480073F8EE /* PaywallView */ = {
+		92FDA5102A2E678F00CCC789 /* PaywallView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PaywallView;
 		};

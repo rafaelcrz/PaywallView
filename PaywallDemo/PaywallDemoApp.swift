@@ -8,6 +8,45 @@
 import SwiftUI
 import PaywallView
 
+extension Badge {
+    static func preview(alwaysVisible: Bool = true) -> Badge {
+        return Badge(
+            id: UUID().uuidString,
+            title: "badge",
+            alwaysVisible: alwaysVisible,
+            alignment: .top,
+            primaryColor: Color(.systemCyan)
+        )
+    }
+}
+
+extension Plan {
+    static var previewMonthly: Plan {
+        return Plan(
+            id: "monthly",
+            name: "Monthly",
+            cost: "R$ 4.99",
+            primaryInfo: "7 days free trial",
+            secondaryIndo: "($4.17/mo)",
+            primary: true,
+            badge: .preview()
+        )
+    }
+
+    static var previewYearly: Plan {
+        return Plan(
+            id: "yearly",
+            name: "Yearly",
+            cost: "R$ 214.99",
+            primaryInfo: "7 days free trial",
+            secondaryIndo: "($4.17/mo)",
+            primary: true,
+            badge: .preview(alwaysVisible: false),
+            actionButtonPrimaryTitle: "Action plan title"
+        )
+    }
+}
+
 @main
 struct PaywallDemoApp: App {
     var body: some Scene {
@@ -49,7 +88,8 @@ struct PageView: View {
     private func load() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.paywallConfig.options = [
-                .previewYearly
+                .previewYearly,
+                .previewMonthly
             ]
         })
     }

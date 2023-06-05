@@ -30,8 +30,6 @@ struct PlanOptionListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             PlanOptionListView(primaryColor: .pink, options: [
-                .previewYearly,
-                .previewYearly,
             ], selectedPlan: .constant(.previewYearly)).previewLayout(.sizeThatFits)
         }
     }

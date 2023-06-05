@@ -34,7 +34,9 @@ public struct Badge: Hashable, Equatable {
         case center
         case bottom
     }
-    
+}
+
+extension Badge {
     static func preview(alwaysVisible: Bool = true) -> Badge {
         return Badge(
             id: UUID().uuidString,

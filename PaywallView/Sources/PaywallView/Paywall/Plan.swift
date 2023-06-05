@@ -36,8 +36,10 @@ public struct Plan: Equatable, Hashable {
         self.badge = badge
         self.actionButtonPrimaryTitle = actionButtonPrimaryTitle
     }
+}
 
-    public static var previewMonthly: Plan {
+extension Plan {
+    static var previewMonthly: Plan {
         return Plan(
             id: "monthly",
             name: "Monthly",
@@ -49,7 +51,7 @@ public struct Plan: Equatable, Hashable {
         )
     }
 
-    public static var previewYearly: Plan {
+    static var previewYearly: Plan {
         return Plan(
             id: "yearly",
             name: "Yearly",

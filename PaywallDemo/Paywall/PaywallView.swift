@@ -34,28 +34,30 @@ struct PaywallView: View {
                                 TitleHeaderView(
                                     primaryHeader: paywall.primaryHeader ?? "",
                                     secondaryHeader: paywall.secondaryHeader ?? ""
-                                ).padding(.top, -16)
+                                )
+                                .padding(.top, -16)
+                                .padding(.bottom)
                             }
                             
+                            FeaturesView()
+                            //                                .padding(.horizontal, -16)
+                            //                            carouselSection()
+                            //                                .padding(.horizontal, -16)
                             Spacer()
-                            
-                            carouselSection()
-                                .padding(.horizontal, -16)
-                            Spacer()
-                            Text("Pro access to all features")
-                                .padding(.bottom)
                             
                             Group {
+                                Text("Pro access to all features")
                                 switch paywall.planPresentation {
                                 case .progress:
                                     planOptionsProgressPresentationView
                                 case .expandable:
                                     planOptionListView
                                 }
-                            }
+                            }.padding(.top)
                             
                             actionButton
                                 .padding(.top)
+                            
                             Label("Purchases share between family members.", systemImage: "person.circle.fill")
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
@@ -184,5 +186,43 @@ struct PaywallView_Previews: PreviewProvider {
         ]
         
         return PaywallView(paywall: paywall)
+    }
+}
+
+struct FeaturesView: View {
+    let features: [FeatureCard] = [
+        .automaticBackups,
+        .biometricsLock,
+        .customTags,
+        .moreStats,
+        .unlimitedEntries,
+        .automaticBackups,
+        .unlimitedGoals
+    ]
+    var body: some View {
+        VStack(alignment: .leading) {
+            ForEach(features, id: \.self) { feature in
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text(feature.title)
+                        .padding(.leading)
+                    Spacer()
+                    Image(systemName: "info.circle.fill")
+                        .foregroundStyle(
+                            .white.opacity(0.6),
+                            .secondary.opacity(0.4))
+                }.padding(.bottom,4)
+            }
+        }
+        .padding()
+        .background(Color(.secondarySystemGroupedBackground))
+        .cornerRadius(12)
+    }
+}
+
+struct FeaturesViewy_Previews: PreviewProvider {
+    static var previews: some View {
+        FeaturesView()
+            .previewLayout(.sizeThatFits)
     }
 }

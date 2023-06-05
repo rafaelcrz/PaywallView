@@ -29,14 +29,16 @@ struct PaywallView: View {
                 ZStack {
                     Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
                     ScrollView {
-                        VStack(alignment: .center) {
+                        VStack(alignment: .center, spacing: 0) {
                             if paywall.primaryHeader != nil || paywall.secondaryHeader != nil {
                                 TitleHeaderView(
                                     primaryHeader: paywall.primaryHeader ?? "",
                                     secondaryHeader: paywall.secondaryHeader ?? ""
-                                ).padding(.top)
+                                ).padding(.top, -16)
                             }
+                            
                             Spacer()
+                            
                             carouselSection()
                                 .padding(.horizontal, -16)
                             Spacer()
@@ -53,9 +55,11 @@ struct PaywallView: View {
                             }
                             
                             actionButton
+                                .padding(.top)
                             Label("Purchases share between family members.", systemImage: "person.circle.fill")
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
+                                .padding(.top)
                             
                             restorePurchasesButton()
                                 .padding()
@@ -167,13 +171,16 @@ struct PaywallView_Previews: PreviewProvider {
     static var paywall = Paywall(
         primaryColor: Color(.systemPink),
         planPresentation: .progress,
+        primaryHeader: nil,
+        secondaryHeader: nil,
         actionButtonPrimaryTitle: "teste"
     )
     
     static var previews: some View {
         paywall.options = [
             .previewYearly,
-            .previewMonthly
+            .previewMonthly,
+            .previewYearly
         ]
         
         return PaywallView(paywall: paywall)

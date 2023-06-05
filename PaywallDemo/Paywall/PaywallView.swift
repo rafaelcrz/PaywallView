@@ -7,104 +7,162 @@
 
 import SwiftUI
 
+enum Section {
+    case header
+    case features
+    case products
+    case primaryButton
+    case tertiaryInfo
+    case secondayBurron
+}
+
 struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedPlan: PremiumPlan = .yearly
-    let iPhone14ProMaxScreenSize: CGSize = CGSize(width: 430.0, height: 932.0)
-    let screenSize: CGSize = UIScreen.main.bounds.size
+    
+    @State private var selectedPlan: Plan?
+    @StateObject var paywall: Paywall
+    var planSelected: ((Plan) -> Void)?
     
     var body: some View {
-        ZStack {
-            Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
-            VStack(alignment: .center, spacing: 16) {
-                headerSection()
-                carouselSection()
-                choosePlanSection()
-                actionButton()
-                restorePurchasesButton()
+        NavigationStack {
+            GeometryReader { geometry in
+                ZStack {
+                    Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
+                    ScrollView {
+                        VStack(alignment: .center, spacing: 0) {
+                            if paywall.primaryHeader != nil || paywall.secondaryHeader != nil {
+                                TitleHeaderView(
+                                    primaryHeader: paywall.primaryHeader ?? "",
+                                    secondaryHeader: paywall.secondaryHeader ?? ""
+                                )
+                                .padding(.top, -16)
+                                .padding(.bottom)
+                            }
+                            
+                            Group {
+                                switch paywall.featureType {
+                                case .list:
+                                    FeaturesListView()
+                                case .carrousel:
+                                    carouselSection()
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            Group {
+                                Text("Pro access to all features")
+                                switch paywall.planPresentation {
+                                case .progress:
+                                    planOptionsProgressPresentationView
+                                case .expandable:
+                                    planOptionListView
+                                }
+                            }.padding(.top)
+                            
+                            actionButton
+                                .padding(.top)
+                            
+                            Label("Purchases share between family members.", systemImage: "person.circle.fill")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                                .padding(.top)
+                            
+                            restorePurchasesButton()
+                                .padding()
+                            
+                            HStack(spacing: 16) {
+                                Link("Terms", destination: URL(string: "www.google.com")!)
+                                Link("Privacy", destination: URL(string: "www.google.com")!)
+                            }
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                        }
+                        .frame(minHeight: geometry.size.height)
+                        .animation(.spring(), value: paywall.options)
+                        .padding()
+                        .if(paywall.cancelType == .button, { view in
+                            view.toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button {
+                                        dismiss()
+                                    } label: {
+                                        Image.xmarkCircleIcon
+                                            .font(.title3)
+                                            .foregroundStyle(
+                                                Color.white.opacity(0.6),
+                                                Color.secondary.opacity(0.4)
+                                            )
+                                    }
+                                    
+                                }
+                            }
+                        })
+                    }.frame(width: geometry.size.width)
+                }
             }
-            // To make the view 'responsive' we scale it down from an iPhone14ProMax's size
-            // Note: This is a temporary 'hack' that will not work for all device types
-            .scaleEffect(CGSize(width: screenSize.width / iPhone14ProMaxScreenSize.width,
-                                height: screenSize.height / iPhone14ProMaxScreenSize.height))
-            .padding(.horizontal, isIPhone14ProMax() ? 0 : -20)
-            .animation(.spring(), value: selectedPlan)
         }
     }
     
-    private func headerSection() -> some View {
-        return VStack {
-            HStack {
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        Text("My Trading Journal")
-                            .font(.system(size: 26, weight: .semibold))
-                        Spacer()
-                        XMarkButton() { dismiss() }
+    private var planOptionListView: some View {
+        PlanOptionListView(
+            primaryColor: paywall.primaryColor,
+            options: paywall.options,
+            selectedPlan: $selectedPlan
+        )
+    }
+    
+    private var planOptionsProgressPresentationView: some View {
+        Group {
+            if paywall.options.isEmpty {
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height: 200)
+                    .overlay {
+                        ProgressView("")
+                            .progressViewStyle(.circular)
                     }
-                    Text("Premium")
-                        .font(.system(size: 40, weight: .bold))
-                }
-                Spacer()
+            } else {
+                planOptionListView
             }
-        }.padding(20)
+        }
     }
     
     private func carouselSection() -> some View {
-        return VStack {
-            InfiniteScroller(contentWidth: getContentWidth(), direction: .forward) {
-                HStack(spacing: 16) {
-                    FeatureCardView(featureCard: .unlimitedEntries)
-                    FeatureCardView(featureCard: .importData)
-                    FeatureCardView(featureCard: .biometricsLock)
-                    FeatureCardView(featureCard: .automaticBackups)
-                }.padding(8)
-            }
-            
-            InfiniteScroller(contentWidth: getContentWidth(), direction: .backward) {
-                HStack(spacing: 16) {
-                    FeatureCardView(featureCard: .customTags)
-                    FeatureCardView(featureCard: .moreStats)
-                    FeatureCardView(featureCard: .moreDates)
-                    FeatureCardView(featureCard: .unlimitedGoals)
-                }.padding(8)
-            }
+        InfiniteScroller(contentWidth: getContentWidth(), direction: .forward) {
+            HStack(spacing: 16) {
+                FeatureCardView(featureCard: .unlimitedEntries)
+                FeatureCardView(featureCard: .importData)
+                FeatureCardView(featureCard: .biometricsLock)
+                FeatureCardView(featureCard: .automaticBackups)
+            }.padding(8)
         }
     }
     
-    private func choosePlanSection() -> some View {
-        return VStack(alignment: .center, spacing: 16) {
-            Text("Choose a plan")
-                .foregroundColor(.secondary)
-                .font(.system(size: 20, weight: .medium))
-                .padding(.top)
-            MonthlyPlanView(selectedPlan: $selectedPlan).padding(.bottom, 12)
-            YearlyPlanView(selectedPlan: $selectedPlan).padding(.bottom)
-        }
-    }
-    
-    private func actionButton() -> some View {
-        return Button {
-            // TODO: action
+    private var actionButton: some View {
+        Button {
+            if let selectedPlan = selectedPlan {
+                planSelected?(selectedPlan)
+            }
         } label: {
-            Text(selectedPlan == .yearly ? "Start Free Trial" : "Continue")
-                .font(.system(size: 28, weight: .medium))
-                .foregroundColor(.white)
-                .padding(12)
+            Text(selectedPlan?.actionButtonPrimaryTitle ?? paywall.actionButtonPrimaryTitle)
                 .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .cornerRadius(10)
-                .padding(.horizontal, 24)
+                .foregroundColor(Color(.black))
+                .padding(10)
+                .animation(.spring(), value: selectedPlan?.actionButtonPrimaryTitle)
         }
+        .padding(.horizontal)
+        .tint(paywall.primaryColor)
+        .buttonStyle(.borderedProminent)
     }
     
     private func restorePurchasesButton() -> some View {
-        return Button {
-            // TODO: action
+        Button {
+            
         } label: {
             Text("Restore Purchases")
-                .font(.system(size: 16, weight: .medium))
-        }.padding(8)
+                .font(.caption)
+        }
     }
     
     private func getContentWidth() -> CGFloat {
@@ -114,14 +172,24 @@ struct PaywallView: View {
         let contentWidth: CGFloat = (cardWidth * 4) + (spacing * 9) + padding
         return contentWidth
     }
-    
-    private func isIPhone14ProMax() -> Bool {
-        return screenSize == iPhone14ProMaxScreenSize
-    }
 }
 
 struct PaywallView_Previews: PreviewProvider {
+    static var paywall = Paywall(
+        primaryColor: Color(.systemPink),
+        planPresentation: .progress,
+        primaryHeader: nil,
+        secondaryHeader: nil,
+        actionButtonPrimaryTitle: "teste"
+    )
+    
     static var previews: some View {
-        PaywallView()
+        paywall.options = [
+            .previewYearly,
+            .previewMonthly,
+            .previewYearly
+        ]
+        
+        return PaywallView(paywall: paywall)
     }
 }

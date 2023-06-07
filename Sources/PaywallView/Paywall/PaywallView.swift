@@ -35,6 +35,26 @@ public struct PaywallView: View {
                     Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
                     ScrollView {
                         VStack(alignment: .center, spacing: 0) {
+                            HStack {
+                                Group {
+                                    if paywall.cancelType == .button {
+                                        Image.xmarkCircleIcon
+                                            .font(.title3)
+                                            .foregroundStyle(
+                                                Color.white.opacity(0.6),
+                                                Color.secondary.opacity(0.4)
+                                            )
+                                    } else {
+                                        Text("Not now")
+                                    }
+                                }.onTapGesture {
+                                    dismiss()
+                                }
+                                Spacer()
+                            }
+                            .padding(.bottom)
+                            .padding(.bottom)
+                            
                             if paywall.primaryHeader != nil || paywall.secondaryHeader != nil {
                                 TitleHeaderView(
                                     primaryHeader: paywall.primaryHeader ?? "",
@@ -51,61 +71,48 @@ public struct PaywallView: View {
                                 case .carrousel:
                                     carouselSection()
                                 }
-                            }
+                            }.padding(.bottom)
                             
-                            Spacer()
+//                            Spacer()
                             
                             Group {
                                 Text("Pro access to all features")
+                                    .padding(.bottom)
                                 switch paywall.planPresentation {
                                 case .progress:
                                     planOptionsProgressPresentationView
                                 case .expandable:
                                     planOptionListView
                                 }
-                            }.padding(.top)
+                            }
                             
                             Spacer()
                             
                             actionButton
-                                .padding(.top)
-                            
-                            Label("Purchases share between family members.", systemImage: "person.circle.fill")
-                                .font(.caption2)
-                                .foregroundColor(.secondary)
-                                .padding(.top)
+                                .padding(.bottom)
+
+//                            Label("Purchases share between family members.", systemImage: "person.circle.fill")
+//                                .font(.caption2)
+//                                .foregroundColor(.secondary)
+//                                .padding(.top)
                             
                             restorePurchasesButton()
-                                .padding()
+                                .padding(.bottom)
                             
                             HStack(spacing: 16) {
+                                Link("Restore purchases", destination: URL(string: "www.google.com")!)
                                 Link("Terms", destination: URL(string: "www.google.com")!)
                                 Link("Privacy", destination: URL(string: "www.google.com")!)
                             }
                             .foregroundColor(.secondary)
                             .font(.caption)
+                            .padding(.bottom)
                         }
                         .frame(minHeight: geometry.size.height)
                         .animation(.spring(), value: paywall.options)
                         .padding()
-                        .if(paywall.cancelType == .button, { view in
-                            view.toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
-                                    Button {
-                                        dismiss()
-                                    } label: {
-                                        Image.xmarkCircleIcon
-                                            .font(.title3)
-                                            .foregroundStyle(
-                                                Color.white.opacity(0.6),
-                                                Color.secondary.opacity(0.4)
-                                            )
-                                    }
-                                    
-                                }
-                            }
-                        })
-                    }.frame(width: geometry.size.width)
+                    }
+                    .frame(width: geometry.size.width)
                 }
             }
         }
@@ -160,6 +167,8 @@ public struct PaywallView: View {
         }
         .padding(.horizontal)
         .tint(paywall.primaryColor)
+        .disabled(selectedPlan == nil)
+        .animation(.easeIn, value: selectedPlan)
         .buttonStyle(.borderedProminent)
     }
     

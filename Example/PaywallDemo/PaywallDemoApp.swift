@@ -59,7 +59,7 @@ struct PaywallDemoApp: App {
 struct PageView: View {
     @State private var showingPaywall: Bool = false
 
-    var paywallConfig: Paywall = .init(
+    var paywall: Paywall = .init(
         primaryColor: .red,
         cancelType: .button,
         featureType: .list,
@@ -79,9 +79,9 @@ struct PageView: View {
             Button("show paywall") {
                 showingPaywall = true
             }.sheet(isPresented: $showingPaywall) {
-                PaywallView(paywall: paywallConfig, options: options) { plan in
+                PaywallView(paywall: paywall, options: options, actionPurchase: {_ in
                     showingPaywall = false
-                }
+                })
             }
         }
     }

@@ -65,6 +65,8 @@ public struct PaywallView: View {
                                 }
                             }.padding(.top)
                             
+                            Spacer()
+                            
                             actionButton
                                 .padding(.top)
                             

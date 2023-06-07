@@ -26,7 +26,6 @@ public final class Paywall: ObservableObject {
     var secondaryHeader: String?
     var actionButtonPrimaryTitle: String
     var cancelType: CancelType
-    @Published public var options: [Plan] = []
     
     public init(
         primaryColor: Color,

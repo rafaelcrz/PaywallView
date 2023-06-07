@@ -20,14 +20,20 @@ public struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var selectedPlan: (Plan)?
-    @StateObject var paywall: Paywall
+    var paywall: Paywall
     var planSelected: ((Plan) -> Void)?
+    @State var options: [Plan] = []
     
-    public init(paywall: Paywall, planSelected: ((Plan) -> Void)? = nil) {
-        self._paywall = .init(wrappedValue: paywall)
+    public init(
+        paywall: Paywall,
+        options: [Plan] = [],
+        planSelected: ((Plan) -> Void)? = nil
+    ) {
+        self.paywall = paywall
         self.planSelected = planSelected
+        self._options = .init(wrappedValue: options)
     }
-
+    
     public var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -73,7 +79,7 @@ public struct PaywallView: View {
                                 }
                             }.padding(.bottom)
                             
-//                            Spacer()
+                            //                            Spacer()
                             
                             Group {
                                 Text("Pro access to all features")
@@ -90,11 +96,11 @@ public struct PaywallView: View {
                             
                             actionButton
                                 .padding(.bottom)
-
-//                            Label("Purchases share between family members.", systemImage: "person.circle.fill")
-//                                .font(.caption2)
-//                                .foregroundColor(.secondary)
-//                                .padding(.top)
+                            
+                            //                            Label("Purchases share between family members.", systemImage: "person.circle.fill")
+                            //                                .font(.caption2)
+                            //                                .foregroundColor(.secondary)
+                            //                                .padding(.top)
                             
                             restorePurchasesButton()
                                 .padding(.bottom)
@@ -109,7 +115,7 @@ public struct PaywallView: View {
                             .padding(.bottom)
                         }
                         .frame(minHeight: geometry.size.height)
-                        .animation(.spring(), value: paywall.options)
+                        .animation(.spring(), value: options)
                         .padding()
                     }
                     .frame(width: geometry.size.width)
@@ -121,14 +127,14 @@ public struct PaywallView: View {
     private var planOptionListView: some View {
         PlanOptionListView(
             primaryColor: paywall.primaryColor,
-            options: paywall.options,
+            options: options,
             selectedPlan: $selectedPlan
         )
     }
     
     private var planOptionsProgressPresentationView: some View {
         Group {
-            if paywall.options.isEmpty {
+            if options.isEmpty {
                 Rectangle()
                     .fill(.clear)
                     .frame(height: 200)
@@ -199,13 +205,14 @@ struct PaywallView_Previews: PreviewProvider {
         actionButtonPrimaryTitle: "teste"
     )
     
+    @State static var options: [Plan] = [
+        .previewYearly,
+        .previewMonthly,
+        .previewYearly
+    ]
+    
     static var previews: some View {
-        paywall.options = [
-            .previewYearly,
-            .previewMonthly,
-            .previewYearly
-        ]
         
-        return PaywallView(paywall: paywall)
+        return PaywallView(paywall: paywall, options: options)
     }
 }

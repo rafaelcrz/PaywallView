@@ -59,7 +59,7 @@ struct PaywallDemoApp: App {
 struct PageView: View {
     @State private var showingPaywall: Bool = false
 
-    @StateObject var paywallConfig: Paywall = .init(
+    var paywallConfig: Paywall = .init(
         primaryColor: .red,
         cancelType: .button,
         featureType: .list,
@@ -69,29 +69,21 @@ struct PageView: View {
         actionButtonPrimaryTitle: "Primary action title"
     )
     
-    var body: some View {
-        Button("Pro access") {
-            showingPaywall.toggle()
-        }
-        .sheet(isPresented: $showingPaywall) {
-            PaywallView(paywall: paywallConfig) { plan in
-                showingPaywall = false
-            }
-        }
-        .onChange(of: showingPaywall) { newValue in
-            if showingPaywall {
-                load()
-            }
-        }
-    }
+    @State var options: [Plan] = [
+        .previewYearly,
+        .previewMonthly
+    ]
     
-    private func load() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.paywallConfig.options = [
-                .previewYearly,
-                .previewMonthly
-            ]
-        })
+    var body: some View {
+        VStack {
+            Button("show paywall") {
+                showingPaywall = true
+            }.sheet(isPresented: $showingPaywall) {
+                PaywallView(paywall: paywallConfig, options: options) { plan in
+                    showingPaywall = false
+                }
+            }
+        }
     }
 }
 

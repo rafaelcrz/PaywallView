@@ -18,19 +18,19 @@ enum Section {
 
 public struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
-    
     @State private var selectedPlan: (Plan)?
-    var paywall: Paywall
-    var planSelected: ((Plan) -> Void)?
-    @State var options: [Plan] = []
     
+    public var paywall: Paywall
+    @State public var options: [Plan]
+    public var actionPurchase: (Plan) -> ()
+
     public init(
         paywall: Paywall,
         options: [Plan] = [],
-        planSelected: ((Plan) -> Void)? = nil
+        actionPurchase: @escaping (Plan) -> ()
     ) {
         self.paywall = paywall
-        self.planSelected = planSelected
+        self.actionPurchase = actionPurchase
         self._options = .init(wrappedValue: options)
     }
     
@@ -162,7 +162,7 @@ public struct PaywallView: View {
     private var actionButton: some View {
         Button {
             if let selectedPlan = selectedPlan {
-                planSelected?(selectedPlan)
+                actionPurchase(selectedPlan)
             }
         } label: {
             Text(selectedPlan?.actionButtonPrimaryTitle ?? paywall.actionButtonPrimaryTitle)
@@ -213,6 +213,8 @@ struct PaywallView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        return PaywallView(paywall: paywall, options: options)
+        return PaywallView(paywall: paywall, options: options, actionPurchase: {_ in
+            
+        })
     }
 }

@@ -63,7 +63,7 @@ struct PageView: View {
         primaryColor: .red,
         cancelType: .button,
         featureType: .list,
-        planPresentation: .progress,
+        planPresentation: .expandable,
         primaryHeader: "Primary header",
         secondaryHeader: "Secondary header",
         actionButtonPrimaryTitle: "Primary action title"

@@ -21,7 +21,7 @@ public struct PaywallView: View {
     @State private var selectedPlan: (Plan)?
     
     public var paywall: Paywall
-    @State public var options: [Plan]
+    public var options: [Plan]
     public var actionPurchase: (Plan) -> ()
 
     public init(
@@ -31,7 +31,7 @@ public struct PaywallView: View {
     ) {
         self.paywall = paywall
         self.actionPurchase = actionPurchase
-        self._options = .init(wrappedValue: options)
+        self.options = options
     }
     
     public var body: some View {

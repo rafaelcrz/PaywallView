@@ -69,7 +69,7 @@ struct PageView: View {
         actionButtonPrimaryTitle: "Primary action title"
     )
     
-    @State var options: [Plan] = [
+    var options: [Plan] = [
         .previewYearly,
         .previewMonthly
     ]
